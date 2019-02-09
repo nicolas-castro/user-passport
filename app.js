@@ -9,12 +9,12 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
-const flash        = require('connect-flash');
+// const flash        = require('connect-flash');
 const session      = require('express-session')
 
-const passport     = require('passport');
 
-require('./config/passport-setup');
+
+const passportSetup =  require('./config/passport/passport-setup');
 
 
 mongoose
@@ -63,20 +63,10 @@ app.use(session({
   saveUninitialized: true
 }));
 
+//Must come after session
 
-app.use(passport.initialize());
-app.use(passport.session());
+passportSetup(app);
 
-//activate flash messages. it is a function it need parenthesis flash()
-app.use(flash());
-
-app.use((req, res, next) =>{
-  res.locals.messages = req.flash();
-  if(req.user){
-    res.locals.currentUser = req.user;
-  }
-  next();
-})
 
 const index = require('./routes/index');
 app.use('/', index);
@@ -84,5 +74,6 @@ app.use('/', index);
 
 app.use('/', require('./routes/auth-routes'));
 app.use('/', require('./routes/user-routes'));
+app.use('/', require('./routes/room-routes'));
 
 module.exports = app;

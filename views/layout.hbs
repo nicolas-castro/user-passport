@@ -14,16 +14,18 @@
     <div class="navbar-nav">
     <a class="nav-item nav-link" href="/signup">Sign Up</a>
     <a class="nav-item nav-link" href="/login">Login</a>
-    <a class="nav-item nav-link" href="/private">Private Page</a>
     <a class="nav-item nav-link" href="/public">Public Page</a>
-
+    <a class="nav-item nav-link" href="/rooms/add">Create Room</a>
+    
     {{#if currentUser}}
+    <a class="nav-item nav-link" href="/private">Private Page</a>
+    <a class="nav-item nav-link" href="/rooms">Room List</a>
     <form action="/logout" method="post" class="nav-item nav-link">
       <button type="submit">Logout</button>
     </form>
     {{else}}
     {{!-- <a href="/signup" class="nav-item nav-link">Signup</a> --}}
-    {{!-- <a href="/login" class="nav-item nav-link">Login</a> --}}
+    <a href="/login" class="nav-item nav-link">Login</a>
   {{/if}}
 
     

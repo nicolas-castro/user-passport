@@ -17,14 +17,4 @@
 
 </form>
 
-{{#if errorMessage}}
-  <h3 style="color:red">{{errorMessage}}</h3>
-{{/if}}
-
-{{#if messages}}
-
-  {{#each messages}}
-    {{ this }}
-  {{/each}}
-
-{{/if}}
+{{> flashMessage}}

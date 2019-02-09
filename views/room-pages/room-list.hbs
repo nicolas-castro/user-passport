@@ -1,0 +1,15 @@
+<h1>Welcome to Rooms View</h1>
+
+<ul>
+  {{#each roomsFromDB}}
+  <li> 
+    <h3>{{ this.name }} </h3> 
+    <img src="{{this.imageUrl}}" alt="" width="300">
+    {{#if this.isOwner}}
+      <form action="/rooms/{{this._id}}/delete">
+        <button type="submit">Delete</button>
+      </form>
+    {{/if}}
+  </li>
+  {{/each}}
+</ul>

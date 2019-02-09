@@ -78,4 +78,30 @@ router.post('/logout', (req, res, next) => {
 })
 
 
+//////////slack///////////
+
+router.get('/slack-login', passport.authenticate('slack'));
+router.get('/slack/callback', passport.authenticate('slack', {
+  successReturnToOrRedirect:'/private',
+  successFlash:'Slack login successful!',
+  failureRedirect:'/login',
+  failureMessage:'Slack login failed. Pease try to login manually. 🙏🏻'
+}))
+
+//////////google///////////
+
+router.get('/google-login', passport.authenticate('google', {
+  scope: [
+    "https://www.googleapis.com/auth/plus.login",
+    "https://www.googleapis.com/auth/plus.profile.emails.read"
+  ]
+}));
+
+router.get('/google/callback', passport.authenticate('google', {
+  successRedirect: '/private',
+  failureRedirect: '/login',
+
+}))
+
+
 module.exports = router;
