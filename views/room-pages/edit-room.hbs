@@ -1,0 +1,24 @@
+
+  
+  
+    <h3>{{ this.foundRoom.name }} </h3> 
+    <h4>{{this.foundRoom.description}}</h4>
+    <img src="{{this.foundRoom.imageUrl}}" alt="" width="300">
+    <br>
+    <br>
+
+
+<form action="/rooms/{{this.foundRoom._id}}/update" method="POST" enctype="multipart/form-data">
+
+ <label for="name">Name</label>
+  <input type="text" name="name" id="" value="{{this.foundRoom.name}}" >
+  <label for="description">Description</label>
+  <textarea name="description" id="" cols="30" rows="10">{{this.foundRoom.description}}</textarea>
+
+  <label for="">Upload Image</label>
+  <input type="file" name="imageUrl" id="" value="{{this.foundRoom.imageUrl}}" >
+
+  <button type="submit">Save Changes</button>
+
+</form>
+
