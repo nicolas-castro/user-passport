@@ -6,7 +6,7 @@ const roomSchema = new Schema ({
   description: String,
   imageUrl: String,
   owner: { type: Schema.Types.ObjectId, ref: 'User'},
-  reviews: []
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review'}]
 })
 
 const Room = mongoose.model('Room', roomSchema);

@@ -66,15 +66,22 @@ router.get('/rooms/:theRoomId/edit', (req,res, next)=>{
   })
 
   router.post('/rooms/:theRoomId/update', fileUploader.single('imageUrl'), (req, res, next)=>{
-    Room.findByIdAndUpdate(req.params.theRoomId, {
-      name: req.body.name,
-      description: req.body.description,
-      imageUrl: req.file.secure_url,
+
+    const { name, description } = req.body;
+
+    const updatedRoom = {
+      name,
+      description,
       owner: req.user._id
-    })
+    }
+    if(req.file){
+      updatedRoom.imageUrl = req.file.secure_url;
+    }
+
+    Room.findByIdAndUpdate(req.params.theRoomId, updatedRoom)
     .then( updatedRoom => {
-      console.log("This is updated: ",{updatedRoom})
-      res.redirect(`/rooms`)
+      console.log("This Room is updated: ",{updatedRoom})
+      res.redirect(`/rooms/${updatedRoom._id}/edit`)
     })
     .catch( err => next(err) )
   })
